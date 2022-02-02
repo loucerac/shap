@@ -14,12 +14,25 @@
  * limitations under the License.
  */
 
+ /*
+ * Copyright (c) 2020, NVIDIA CORPORATION.
+ *
+ * The original NVIDIA file has been modified by Carlos Loucera
+ * to accommodate changes in the CUDA API (>= 11)
+ */
+
 #pragma once
+#include <cuda_runtime_api.h>
 #include <thrust/device_allocator.h>
 #include <thrust/device_vector.h>
 #include <thrust/iterator/discard_iterator.h>
 #include <thrust/logical.h>
 #include <thrust/reduce.h>
+#ifndef __CUDACC_VER_MAJOR__
+#error __CUDACC_VER_MAJOR__ Undefined
+#elif (__CUDACC_VER_MAJOR__ >= 11)
+#include <thrust/host_vector.h>
+#endif
 #include <algorithm>
 #include <functional>
 #include <set>
